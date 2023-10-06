@@ -4,7 +4,7 @@ function Product({props}){
             <div className="box">
               <div>
                 <div className="img-box">
-                  <img src={props['image']} alt="" />
+                  <img src={props['image']} alt="h" />
                 </div>
                 <div className="detail-box">
                   <h5>
