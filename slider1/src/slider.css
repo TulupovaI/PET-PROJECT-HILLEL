@@ -1,0 +1,31 @@
+.slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  background-size: cover;
+  background-position: center;
+  height: 400px; /* Adjust according to your need */
+}
+
+.indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+.indicator.active {
+  background-color: white;
+}
