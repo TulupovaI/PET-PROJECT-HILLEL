@@ -5,42 +5,41 @@ import Product from "./Product";
 function OurMenu(){
 
   const [products, setProducts] = useState([]);
- 
+  const [productsType, setProductsType] = useState([]);
   useEffect(()=>
   {
-      let products1 = [];
+      let dowloadingProducts = false;
       async function hej(){
           let products1 = await allProducts();
           setProducts(products1);
           addProducts(products1);
+          setProductsType(products1);
       }
 
-  if(products1.length === 0){
+  if(!dowloadingProducts){
           hej();
+          dowloadingProducts = true
       }
 
   },[])
- 
-  function addProducts(products){
-    let allTypeProducts = [];
-    let allProducts2 = [];
-    for(const key in products){
-        allTypeProducts.push(key);
-        
-    }
-    allTypeProducts.forEach((item) => {
-            for(const key in products[item]){
-                 allProducts2.push(products[item][key]);
-                 
-             }
-             
-        })
-
-        setProducts(allProducts2);
-        console.log(allProducts2)
-  }
-
   
+  function addProducts(products) {
+    const allProducts2 = Object.values(products).flatMap(product => Object.values(product));
+    setProducts(allProducts2);
+  }
+  
+
+  function handleOnclick(e){
+const nameFilter = e.target.textContent.toLowerCase();
+let newOne;
+for(const key in productsType){
+  if(key === nameFilter){
+    newOne = Object.values(productsType[key]);
+  }
+}
+console.log(productsType)
+setProducts(newOne)
+  }
 
 
     return(
@@ -52,9 +51,9 @@ function OurMenu(){
       </div>
 
       <ul className="filters_menu">
-        <li className="active" data-filter="*">All</li>
-        <li data-filter=".burger">Burger</li>
-        <li data-filter=".pizza">Pizza</li>
+        <li className="active" data-filter="*" onClick={()=>{addProducts(productsType)}}>All</li>
+        <li data-filter=".burger" onClick={handleOnclick}>Burgers</li>
+        <li data-filter=".pizza" onClick={handleOnclick}>Pizza</li>
         <li data-filter=".pasta">Pasta</li>
         <li data-filter=".fries">Fries</li>
       </ul>
