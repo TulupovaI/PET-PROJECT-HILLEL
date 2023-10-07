@@ -1,19 +1,32 @@
+import { NavLink } from 'react-router-dom';
 import Logo from '../images/hero-bg.jpg'
-
+import Slider from './Slider';
+import { useLocation } from 'react-router-dom';
 function Header(){
-return(<>
+  const location = useLocation();
+  console.log(location.pathname);
+  let background = false;
+if(location.pathname === "/"){
+  background = true;
+}
+
+const colorBackground = {
+  backgroundColor: 'black',
+};
+return(
+<>
  
-    <div className="bg-box">
+    {background && <div className="bg-box">
       <img src={Logo} alt="" />
-    </div>
- <header className="header_section">
+    </div>}
+ <header className="header_section" style={colorBackground}>
       <div className="container">
         <nav className="navbar navbar-expand-lg custom_nav-container ">
-          <a className="navbar-brand" href="index.html">
+          <NavLink className="navbar-brand" to="/">
             <span>
               Feane
             </span>
-          </a>
+          </NavLink>
 
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className=""> </span>
@@ -22,10 +35,10 @@ return(<>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav  mx-auto ">
               <li className="nav-item active">
-                <a className="nav-link" href="index.html">Home <span className="sr-only">(current)</span></a>
+                <NavLink className="nav-link" to="/">Home <span className="sr-only">(current)</span></NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="menu.html">Menu</a>
+                <NavLink className="nav-link" to="/menu">Menu</NavLink>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="about.html">About</a>
@@ -39,6 +52,8 @@ return(<>
         </nav>
       </div>
     </header>
+   
+   
 </>)
 }
 
