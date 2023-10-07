@@ -13,10 +13,8 @@ const Home = () => {
     
     return(
         <>
-         <div className="hero_area">
-   
-   <Slider />  
-  </div>
+        
+ 
   <OurMenu />
         </>
     )
